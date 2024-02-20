@@ -1,0 +1,139 @@
+<html>
+
+<head>
+  <title>Thermometer Lab</title>
+  
+</head>
+
+<body>
+  <h1>Thermometer Lab</h1>
+  
+  
+
+  <div>
+    <svg version="1.1" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" height="50%" width="75%">
+      <style>
+        #selectedOption {
+          position: relative;
+          top: 47px; 
+          left: 400px;
+        }
+
+        .Farenheit {background-color: #04AA6D;} 
+        #glass {
+          fill: #ffffff;
+          stroke: #cccccc;
+          stroke-width: 3;
+        }
+
+        #container {
+          fill: #ffffff;
+          stroke: #000000;
+          stroke-width: 5;
+        }
+
+        #ticks{
+          fill: #000000;
+          text-anchor: left;
+          font-size: 12px;
+
+        }
+        #liquid {
+          fill: blue;
+        }
+        #shine {
+          fill: blue;
+          stroke: #ffffff;
+          stroke-width: 1;
+        }
+      </style>
+
+      <g id="ticks">
+        <rect  x="80" y="26" width="20" height="7" />
+        <rect  x="80" y="38" width="10" height="7" />
+        <rect  x="80" y="50" width="20" height="7" />
+        <rect  x="80" y="62" width="10" height="7" />
+        <rect  x="80" y="74" width="20" height="7" />
+        <rect  x="80" y="86" width="10" height="7" />
+        <rect  x="80" y="98" width="20" height="7" />
+        <rect  x="80" y="110" width="10" height="7" />
+        <rect  x="80" y="122" width="20" height="7" />
+        <rect  x="80" y="134" width="10" height="7" />
+        <rect  x="80" y="146" width="20" height="7" />
+
+        <text  class="label" id="temp1" x="105" y="33" >212°F</text>
+        <text  class="label" id="temp2" x="105" y="57" >169.6°F</text>
+        <text  class="label" id="temp3" x="105" y="81" >127.2°F</text>
+        <text  class="label" id="temp4" x="105" y="105" >84.8°F</text>
+        <text  class="label" id="temp5" x="105" y="130" >42.4°F</text>
+        <text  class="label" id="temp6" x="105" y="153" >0°F</text>
+      </g>
+
+      <g id="glass">
+        <rect x="45" y="20" width="30" height="160" rx="15" />
+        <ellipse cx="60" cy="180" rx="30" ry="30" />
+        <rect x="46.5" y="22" width="27" height="165" rx="15" stroke="none" />
+      </g>
+      <g id="liquid">
+        <ellipse id="bulb" cx="60" cy="180" rx="20" ry="20"/>
+        <rect id="substance" x="52.5" y="45" width="15" height="0" rx="7" />
+      </g>
+      <g id="shine">
+        <path id="shine1" d=" M 62 195 A 15 15 0 0 1 48 172" />
+        <path id="shine2" d=" M 54 166 A 14 14 0 0 1 67 167" />
+      </g>
+    </svg>
+  <div class="slider">
+    <input type="range" min="10" max="118" value="0" class="slider" id="tempSlide" onchange="tempSlider()">
+  </div>
+  <div>
+    <input type="radio" id="farenheit" name="temperature" value="farenheit" onclick="updateValue('f')"> Farenheit
+    <br>
+    <input type="radio" id="celius" name="temperature" value="celcius" onclick="updateValue('c')"> Celius
+  </div>
+  
+  <script>
+   
+    function updateValue(x){
+    if (x == 'f'){
+      document.getElementById("temp1").textContent = "212°F"
+      document.getElementById("temp2").textContent = "169.6°F"
+      document.getElementById("temp3").textContent = "127.2°F"
+      document.getElementById("temp4").textContent = "84.8°F"
+      document.getElementById("temp5").textContent = "42.4°F"
+      document.getElementById("temp6").textContent = "0°F"}
+    else if(x == 'c'){
+      document.getElementById("temp1").textContent = "100°C"
+      document.getElementById("temp2").textContent = "73.6°C"
+      document.getElementById("temp3").textContent = "47.2°C"
+      document.getElementById("temp4").textContent = "20.8°C"
+      document.getElementById("temp5").textContent = "-5.6°C"
+      document.getElementById("temp6").textContent = "-32°C"}}
+
+    function tempSlider(){
+      let temp = document.getElementById("tempSlide").value;
+      console.log(temp)
+      let thermometerHeight = (temp/118)*152
+      document.getElementById("substance").setAttribute("height", thermometerHeight) 
+      document.getElementById("substance").setAttribute("y", 25+(150-thermometerHeight)) 
+      if (thermometerHeight > 100){ 
+        document.getElementById("substance").setAttribute("fill", "red")
+        document.getElementById("bulb").setAttribute("fill", "red")
+        document.getElementById("shine1").setAttribute("fill", "red")
+        document.getElementById("shine2").setAttribute("fill", "red")}
+      else if (thermometerHeight > 53) { 
+        document.getElementById("substance").setAttribute("fill", "orange")
+        document.getElementById("bulb").setAttribute("fill", "orange")
+        document.getElementById("shine1").setAttribute("fill", "orange")
+        document.getElementById("shine2").setAttribute("fill", "orange")}
+      else { 
+        document.getElementById("substance").setAttribute("fill", "blue")
+        document.getElementById("bulb").setAttribute("fill", "blue")
+        document.getElementById("shine1").setAttribute("fill", "blue")
+        document.getElementById("shine2").setAttribute("fill", "orange")}}
+  
+  </script>
+  
+</body>
+
+</html>
